@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 3000;
 
 let positions= [
     {
-      left: 500,
+      left: 80,
       x: 620,
       y: 340,
     },
     {
-      left: 500,
+      left: 80,
       x: 620,
       y: 340
     }
@@ -24,7 +24,7 @@ let secondId;
 io.on('connection', socket => {    
     socket.emit('positions', positions);
     socket.on('move', data => {
-
+        
         if(!firstId && !secondId) {
             firstId = data.id
             positions[0].left -= 5; // left -5
