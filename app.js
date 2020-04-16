@@ -24,7 +24,7 @@ let secondId;
 io.on('connection', socket => {    
     socket.emit('positions', positions);
     socket.on('move', data => {
-
+        
         if(!firstId && !secondId) {
             firstId = data.id
             positions[0].left -= 5; // left -5
@@ -60,7 +60,7 @@ io.on('connection', socket => {
                 }
             } else if(secondId === data.id){
                 positions[1].left -= 5; // left -5
-                if (positions[1].left <=0 ) {
+                if (positions[1].left <= 0 ) {
                     positions[1].left = 90
                     io.emit('positions', positions)
                     io.emit('winner', data.name)
