@@ -27,7 +27,7 @@ io.on('connection', socket => {
 
         if(!firstId && !secondId) {
             firstId = data.id
-            positions[0].right += 5; // right +5
+            positions[0].right -= 5; // right -5
             if (positions[0].right <=0 ) {
                 positions[0].right = 0
                 io.emit('positions', positions)
@@ -37,7 +37,7 @@ io.on('connection', socket => {
             }
             
         } else if(firstId && !secondId && firstId !== data.id) {
-            positions[1].right += 5; // right -5
+            positions[1].right -= 5; // right -5
                 if (positions[1].right <=0 ) {
                     positions[1].right = 0
                     io.emit('positions', positions)
@@ -50,7 +50,7 @@ io.on('connection', socket => {
 
         }
             if (firstId === data.id) {
-                positions[0].right += 5; // right -5
+                positions[0].right -= 5; // right -5
                 if (positions[0].right <=0 ) {
                     positions[0].right = 0
                     io.emit('positions', positions)
@@ -59,7 +59,7 @@ io.on('connection', socket => {
                     io.emit('positions', positions)
                 }
             } else if(secondId === data.id){
-                positions[1].right += 5; // right -5
+                positions[1].right -= 2; // right -5
                 if (positions[1].right <=0 ) {
                     positions[1].right = 0
                     io.emit('positions', positions)
