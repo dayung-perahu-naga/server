@@ -1,0 +1,29 @@
+{
+  "name": "js-racer-multiplayer",
+  "version": "1.0.0",
+  "description": "npm install first",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayung-perahu-naga/server.git"
+  },
+  "author": "ahmad waluyo, maxwell hamzah, inggar saputra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dayung-perahu-naga/server/issues"
+  },
+  "homepage": "https://github.com/dayung-perahu-naga/server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
