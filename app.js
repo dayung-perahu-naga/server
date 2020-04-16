@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 4100;
     {
       left: 90,
       x: 220,
-      y: 340,
+      y: 300,
     },
     {
       left: 90,
@@ -25,13 +25,16 @@ io.on('connection', socket => {
     socket.emit('positions', positions);
     socket.on('move', data => {
         
-        if(!firstId && !secondId) {
+/*         if(!firstId && !secondId) {
             firstId = data.id
             positions[0].left -= 5; // left -5
             if (positions[0].left <= 0 ) {
-                positions[0].left = 90
-                io.emit('positions', positions)
                 io.emit('winner', data.name)
+                positions[0].left = 90
+                positions[1].left = 90
+                firstId = null
+                secondId = null
+                io.emit('positions', positions)
             } else {
                 io.emit('positions', positions)
             }
@@ -39,9 +42,12 @@ io.on('connection', socket => {
         } else if(firstId && !secondId && firstId !== data.id) {
             positions[1].left -= 5; // left -5
                 if (positions[1].left <= 0 ) {
-                    positions[1].left = 90
-                    io.emit('positions', positions)
                     io.emit('winner', data.name)
+                    positions[0].left = 90
+                    positions[1].left = 90
+                    firstId = null
+                    secondId = null
+                    io.emit('positions', positions)
                 } else {
                     io.emit('positions', positions)
                 }
@@ -52,23 +58,66 @@ io.on('connection', socket => {
             if (firstId === data.id) {
                 positions[0].left -= 5; // left -5
                 if (positions[0].left <= 0 ) {
-                    positions[0].left = 90
-                    io.emit('positions', positions)
                     io.emit('winner', data.name)
+                    positions[0].left = 90
+                    positions[1].left = 90
+                    firstId = null
+                    secondId = null
+                    io.emit('positions', positions)
                 } else {
                     io.emit('positions', positions)
                 }
             } else if(secondId === data.id){
                 positions[1].left -= 5; // left -5
                 if (positions[1].left <= 0 ) {
-                    positions[1].left = 90
-                    io.emit('positions', positions)
                     io.emit('winner', data.name)
+                    positions[0].left = 90
+                    positions[1].left = 90
+                    firstId = null
+                    secondId = null
+                    io.emit('positions', positions)
                 } else {
                     io.emit('positions', positions)
                 }
+            } */
+        
+        if(positions[0].left <= 0 || positions[1].left <= 0) {
+            io.emit('winner', data.name)
+            positions[0].left = 90
+            positions[1].left = 90
+            firstId = null
+            secondId = null
+        } else {
+
+            // WHERE TURNS PLAY IN
+            if(!firstId && !secondId) {
+                firstId = data.id
+                positions[0].left -= 5
+            } 
+            else if(firstId && !secondId && firstId !== data.id) {
+                secondId = data.id
+                positions[1].left -= 5; // left -5
+            } 
+            else if (firstId === data.id) {
+                positions[0].left -= 5;
+            }
+            else if(secondId === data.id){
+                positions[1].left -= 5;
             }
 
+        }
+
+        // WE ALWAYS EMIT POSITIONS, NO MATTER WHAT
+        io.emit('positions', positions)
+
+    })
+
+    //End ON Events
+    socket.on('disconnect', () => {
+        positions[0].left = 90
+        positions[1].left = 90
+        firstId = null
+        secondId = null
     })
 
 })
