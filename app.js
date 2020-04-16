@@ -1,18 +1,32 @@
-require('dotenv').config()
+if(process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+<<<<<<< HEAD
+=======
+
+>>>>>>> db0ec55bec1fb64eb103431b5e405f8704bad571
 const express = require ('express') ;
 const app = express() ;
 const http = require('http').createServer(app) ;
 const io = require('socket.io')(http) ;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4100;
 
 let positions= [
     {
+<<<<<<< HEAD
+      left: 500,
+=======
       left: 80,
+>>>>>>> db0ec55bec1fb64eb103431b5e405f8704bad571
       x: 620,
       y: 340,
     },
     {
+<<<<<<< HEAD
+      left: 500,
+=======
       left: 80,
+>>>>>>> db0ec55bec1fb64eb103431b5e405f8704bad571
       x: 620,
       y: 340
     }
