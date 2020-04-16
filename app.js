@@ -1,10 +1,9 @@
-
-require('dotenv').config()
+// require('dotenv').config()
 const express = require ('express') ;
 const app = express() ;
 const http = require('http').createServer(app) ;
 const io = require('socket.io')(http) ;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4100;
 
 let positions= [
     {
