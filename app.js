@@ -142,7 +142,7 @@ io.on('connection', socket => {
     })
 
     //End ON Events
-    socket.on('disconnect', () => {
+    socket.on('disconnect', (payload) => {
         // positions[0].left = 90
         // positions[1].left = 90
         // firstId = null
@@ -152,6 +152,8 @@ io.on('connection', socket => {
         coords = [null, null]
         playerIndex = -1
         players = {}
+
+        io.emit('disconnected', payload)
     })
 
  
