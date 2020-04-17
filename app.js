@@ -35,9 +35,6 @@ io.on('connection', socket => {
     positions[1].left = 80
     firstId = null
     secondId = null
-
-
-    console.log(idx);
     
     if ( players.length >= 2 ){
          players = []
@@ -46,12 +43,8 @@ io.on('connection', socket => {
     socket.on('players', player =>  {
         players.push(player)
         io.emit('playerName', players)
-        console.log(idx);
-        
-        console.log(players);
-        
         socket.emit('player-number', `You are now player ${players.length}`)
-        socket.broadcast.emit('player-connect', `Player ${players[idx]} just connected`)
+        socket.broadcast.emit('player-connect', `Player ${players[players.length-1]} just connected`)
         idx += 1
     })
 
