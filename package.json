@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.0.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
