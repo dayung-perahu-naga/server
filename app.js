@@ -53,7 +53,6 @@ io.on('connection', socket => {
     // console.log("CONNECTION IS NOW");
     // console.log(connections);
 
-    
     // CANONICAL 2048
     coords[playerIndex] = positions[playerIndex]
 
@@ -70,13 +69,8 @@ io.on('connection', socket => {
         //     players[connections[i].id] = coords[i]
         // }
 
-    
-
-
     // TELL EVERYONE YOU HAVE CONNECTED
     io.emit('player-connect', `Player ${playerIndex+1} just connected`)
-
-
     
     socket.emit('positions', positions);
     socket.on('move', data => {
@@ -159,6 +153,8 @@ io.on('connection', socket => {
         playerIndex = -1
         players = {}
     })
+
+ 
 
 })
 
