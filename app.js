@@ -21,7 +21,7 @@ let coords = [null, null]
       x: 220,
       y: 340,
     }
-  ]
+]
 
 // let firstId;
 // let secondId;
@@ -39,7 +39,6 @@ io.on('connection', socket => {
             playerIndex = i
         }
     }
-
 
     // TELL PLAYER WHAT PLAYER# YOU ARE
     socket.emit('player-number', `You are now player ${playerIndex+1}`)
@@ -124,15 +123,12 @@ io.on('connection', socket => {
                 coords = [null, null]
                 playerIndex = -1
                 players = {}
-
             } else {
                 players[data.id]['left'] -= 5
             }
 
         }
        
-
-
         // WE ALWAYS EMIT POSITIONS, NO MATTER WHAT
         // io.emit('positions', positions)
 
@@ -157,7 +153,6 @@ io.on('connection', socket => {
         // positions[1].left = 90
         // firstId = null
         // secondId = null
-
         // UPGRADE
         connections = [null, null]
         coords = [null, null]
