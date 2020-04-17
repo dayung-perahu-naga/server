@@ -24,10 +24,8 @@ let positions= [
 
 let firstId;
 let secondId;
-
 let players = []
 
-const connections = [null, null]
 
 io.on('connection', socket => {  
 
@@ -45,6 +43,14 @@ io.on('connection', socket => {
         players.push(player)
         console.log(players);
         io.emit('playerName', players)
+    })
+
+    socket.on('disconnect', playerName => {
+        console.log(playerName + 'disconnect');
+        
+        players = players.filter(el => {
+            return el !== playerName
+        })
     })
     
     socket.emit('positions', positions);
@@ -91,6 +97,8 @@ io.on('connection', socket => {
             }
 
     })
+
+ 
 
 })
 
