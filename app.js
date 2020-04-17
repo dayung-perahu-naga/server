@@ -25,16 +25,31 @@ let positions= [
 let firstId;
 let secondId;
 
+let players = []
+
+const connections = [null, null]
+
 io.on('connection', socket => {  
+
 
     positions[0].left = 80
     positions[1].left = 80
     firstId = null
     secondId = null
 
+    if ( players.length >= 2 ){
+         players = []
+    }
+    
+    socket.on('players', player =>  {
+        players.push(player)
+        console.log(players);
+        io.emit('playerName', players)
+    })
+    
     socket.emit('positions', positions);
     socket.on('move', data => {
-        // console.log(positions);
+
         if(!firstId && !secondId) {
             firstId = data.id
             positions[0].left -= 5; // left -5
@@ -55,7 +70,7 @@ io.on('connection', socket => {
                 }
 
         } else if(firstId && secondId) {
-
+          
         }
             if (firstId === data.id) {
                 positions[0].left -= 5; // left -5
