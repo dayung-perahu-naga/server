@@ -23,8 +23,8 @@ let coords = [null, null]
     }
   ]
 
-let firstId;
-let secondId;
+// let firstId;
+// let secondId;
 
 io.on('connection', socket => {
 
