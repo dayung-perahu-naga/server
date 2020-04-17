@@ -2,6 +2,9 @@ if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
+// hello
+let players = {}
+let connections = [null, null]
 const express = require ('express') ;
 const app = express() ;
 const http = require('http').createServer(app) ;
@@ -115,6 +118,20 @@ io.on('connection', socket => {
                     io.emit('positions', positions)
                 }
             }
+
+    //End ON Events
+    socket.on('disconnect', (payload) => {
+        // positions[0].left = 90
+        // positions[1].left = 90
+        // firstId = null
+        // secondId = null
+        // UPGRADE
+        connections = [null, null]
+        coords = [null, null]
+        playerIndex = -1
+        players = {}
+
+        io.emit('disconnected', payload)
 
     })
 
