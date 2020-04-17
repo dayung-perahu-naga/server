@@ -30,28 +30,32 @@ let idx = 0;
 
 io.on('connection', socket => {  
 
-
+    
     positions[0].left = 80
     positions[1].left = 80
     firstId = null
     secondId = null
-    idx = 0
 
 
+    console.log(idx);
+    
     if ( players.length >= 2 ){
          players = []
     }
     
     socket.on('players', player =>  {
         players.push(player)
-        console.log(players);
         io.emit('playerName', players)
-        socket.emit('player-number', `You are now player ${idx}`)
-        io.emit('player-connect', `Player ${players[idx]} just connected`)
-        idx++
+        console.log(idx);
+        
+        console.log(players);
+        
+        socket.emit('player-number', `You are now player ${players.length}`)
+        socket.broadcast.emit('player-connect', `Player ${players[idx]} just connected`)
+        idx += 1
     })
 
-   
+
 
     socket.on('disconnect', playerName => {
         console.log(playerName + 'disconnect');
@@ -70,6 +74,8 @@ io.on('connection', socket => {
             if (positions[0].left <=0 ) {
                 io.emit('positions', positions)
                 io.emit('winner', data.name)
+                players = []
+                idx = 0;
             } else {
                 io.emit('positions', positions)
             }
@@ -79,6 +85,8 @@ io.on('connection', socket => {
                 if (positions[1].left <=0 ) {
                     io.emit('positions', positions)
                     io.emit('winner', data.name)
+                    players = []
+                    idx = 0;
                 } else {
                     io.emit('positions', positions)
                 }
@@ -91,6 +99,8 @@ io.on('connection', socket => {
                 if (positions[0].left <=0 ) {
                     io.emit('positions', positions)
                     io.emit('winner', data.name)
+                    players = []
+                    idx = 0;
                 } else {
                     io.emit('positions', positions)
                 }
@@ -99,6 +109,8 @@ io.on('connection', socket => {
                 if (positions[1].left <=0 ) {
                     io.emit('positions', positions)
                     io.emit('winner', data.name)
+                    players = []
+                    idx = 0;
                 } else {
                     io.emit('positions', positions)
                 }
